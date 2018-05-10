@@ -1,4 +1,5 @@
 {
   "git.enabled": false,
-  "editor.hover": false
+  "editor.hover": false,
+  "editor.formatOnSave": true
 }
