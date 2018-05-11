@@ -1,5 +1,6 @@
 {
   "git.enabled": false,
   "editor.hover": false,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "window.zoomLevel": -1
 }
