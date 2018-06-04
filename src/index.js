@@ -21,7 +21,29 @@ class InnerList extends React.PureComponent {
 class App extends React.Component {
   state = initialData;
 
-  onDragEnd = result => {
+  onDragStart = (start, provided) => {
+    provided.announce(
+      `You have lifted the task in position ${start.source.index + 1}`,
+    );
+  };
+
+  onDragUpdate = (update, provided) => {
+    const message = update.destination
+      ? `You have moved the task to position ${update.destination.index + 1}`
+      : `You are currently not over a droppable area`;
+
+    provided.announce(message);
+  };
+
+  onDragEnd = (result, provided) => {
+    const message = result.destination
+      ? `You have moved the task from position
+        ${result.source.index + 1} to ${result.destination.index + 1}`
+      : `The task has been returned to its starting position of
+        ${result.source.index + 1}`;
+
+    provided.announce(message);
+
     const { destination, source, draggableId, type } = result;
 
     if (!destination) {
@@ -101,7 +123,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
+      <DragDropContext
+        onDragStart={this.onDragStart}
+        onDragUpdate={this.onDragUpdate}
+        onDragEnd={this.onDragEnd}
+      >
         <Droppable
           droppableId="all-columns"
           direction="horizontal"

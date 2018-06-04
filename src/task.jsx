@@ -20,6 +20,7 @@ export default class Task extends React.Component {
             {...provided.dragHandleProps}
             innerRef={provided.innerRef}
             isDragging={snapshot.isDragging}
+            aria-roledescription="Press space bar to lift the task"
           >
             {this.props.task.content}
           </Container>
